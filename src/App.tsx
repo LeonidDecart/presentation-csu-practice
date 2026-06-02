@@ -271,6 +271,12 @@ export default function App() {
                               </div>
                             </div>
 
+                            {col.description && (
+                              <p className="text-[9px] text-slate-500 leading-snug mb-2">
+                                {col.description}
+                              </p>
+                            )}
+
                             <div className="space-y-1.5 pt-2 border-t border-slate-100">
                               {col.prosCons.map((item, index) => (
                                 <div key={index} className="flex items-start gap-1 text-[10px] leading-tight">
@@ -283,9 +289,16 @@ export default function App() {
                                       <XCircle className="w-2 h-2" />
                                     </span>
                                   )}
-                                  <span className={item.isPro ? "text-slate-800 font-semibold" : "text-slate-400"}>
-                                    {item.text}
-                                  </span>
+                                  <div className="min-w-0">
+                                    <span className={item.isPro ? "text-slate-800 font-semibold" : "text-slate-500 font-semibold"}>
+                                      {item.text}
+                                    </span>
+                                    {item.hint && (
+                                      <p className="text-[8px] text-slate-400 leading-snug mt-0.5">
+                                        {item.hint}
+                                      </p>
+                                    )}
+                                  </div>
                                 </div>
                               ))}
                             </div>

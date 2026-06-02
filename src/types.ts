@@ -14,8 +14,10 @@ export interface ComparisonCol {
   id: number;
   optionName: string;
   subtitle: string;
+  description?: string;
   prosCons: {
     text: string;
+    hint?: string;
     isPro: boolean;
   }[];
   isWinner: boolean;
