@@ -329,7 +329,7 @@ export function UseCaseDiagram() {
               Портал стажировок
             </span>
             <span className="text-[10px] text-slate-500 font-medium">
-              Граница системы · Use Case Diagram
+              Граница системы · Схема прецедентов
             </span>
           </div>
         </div>

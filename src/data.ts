@@ -215,7 +215,7 @@ export const slides: SlideData[] = [
     id: 8,
     numberStr: "08",
     badge: "Функциональная модель",
-    title: "Диаграмма прецедентов портала",
+    title: "Схема прецедентов",
     subtitle: "Роли и сценарии использования системы",
     relevanceList: [
       {
