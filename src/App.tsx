@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowLeft,
   ArrowRight,
+  Maximize2,
+  Minimize2,
   Sparkles,
   Check,
   XCircle,
@@ -52,6 +54,7 @@ const statusBadgeClass: Record<string, string> = {
 
 export default function App() {
   const [currentIdx, setCurrentIdx] = useState<number>(0);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
   const currentSlide = slides[currentIdx];
 
@@ -77,6 +80,27 @@ export default function App() {
   const prevSlide = () => {
     setCurrentIdx((prev) => (prev - 1 + slides.length) % slides.length);
   };
+
+  const toggleFullscreen = async () => {
+    if (!document.fullscreenElement) {
+      await document.documentElement.requestFullscreen();
+      return;
+    }
+    await document.exitFullscreen();
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    handleFullscreenChange();
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
 
   return (
     <div className="w-screen h-screen bg-slate-50 overflow-hidden flex flex-col justify-between p-1.5 md:p-3 select-none relative font-sans">
@@ -575,6 +599,15 @@ export default function App() {
           >
             <span className="hidden sm:inline">Далее</span>
             <ArrowRight className="w-3 h-3" />
+          </button>
+
+          <button
+            onClick={toggleFullscreen}
+            className="p-1 px-2 bg-slate-800/80 hover:bg-blue-600 text-white rounded-lg transition duration-150 active:scale-95 text-[10px] font-bold flex items-center gap-1"
+            title={isFullscreen ? "Выйти из полноэкранного режима" : "Полноэкранный режим"}
+          >
+            {isFullscreen ? <Minimize2 className="w-3 h-3" /> : <Maximize2 className="w-3 h-3" />}
+            <span className="hidden sm:inline">{isFullscreen ? "Окно" : "Экран"}</span>
           </button>
         </div>
       </div>
